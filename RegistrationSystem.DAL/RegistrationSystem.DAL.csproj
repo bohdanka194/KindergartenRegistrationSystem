@@ -49,61 +49,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\BaseRepository.cs" />
     <Compile Include="Concrete\EfBaseRepositoty.cs" />
     <Compile Include="Concrete\EFDataContext.cs" />
     <Compile Include="DTO\AddressDTO.cs" />
     <Compile Include="DTO\KindergartenDTO.cs" />
+    <Compile Include="Interfaces\IChildRepository.cs" />
     <Compile Include="Interfaces\IKindetgartenRepository.cs" />
+    <Compile Include="Interfaces\IStaffRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Migrations\201705161200034_Updatekin1.cs" />
-    <Compile Include="Migrations\201705161200034_Updatekin1.Designer.cs">
-      <DependentUpon>201705161200034_Updatekin1.cs</DependentUpon>
+    <Compile Include="Interfaces\IUserRepository.cs" />
+    <Compile Include="Migrations\201705171632567_Cuscade_Delete.cs" />
+    <Compile Include="Migrations\201705171632567_Cuscade_Delete.Designer.cs">
+      <DependentUpon>201705171632567_Cuscade_Delete.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705161204411_Updatekin2.cs" />
-    <Compile Include="Migrations\201705161204411_Updatekin2.Designer.cs">
-      <DependentUpon>201705161204411_Updatekin2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705162335482_UpdateAll.cs" />
-    <Compile Include="Migrations\201705162335482_UpdateAll.Designer.cs">
-      <DependentUpon>201705162335482_UpdateAll.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705170035167_UpdateAll1.cs" />
-    <Compile Include="Migrations\201705170035167_UpdateAll1.Designer.cs">
-      <DependentUpon>201705170035167_UpdateAll1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705170043344_UpdateAll2.cs" />
-    <Compile Include="Migrations\201705170043344_UpdateAll2.Designer.cs">
-      <DependentUpon>201705170043344_UpdateAll2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705170046125_UpdateAll3.cs" />
-    <Compile Include="Migrations\201705170046125_UpdateAll3.Designer.cs">
-      <DependentUpon>201705170046125_UpdateAll3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705170052156_UpdateAll4.cs" />
-    <Compile Include="Migrations\201705170052156_UpdateAll4.Designer.cs">
-      <DependentUpon>201705170052156_UpdateAll4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705170101066_UpdateAll5.cs" />
-    <Compile Include="Migrations\201705170101066_UpdateAll5.Designer.cs">
-      <DependentUpon>201705170101066_UpdateAll5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705170102043_UpdateAll6.cs" />
-    <Compile Include="Migrations\201705170102043_UpdateAll6.Designer.cs">
-      <DependentUpon>201705170102043_UpdateAll6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705170116107_UpdateAll7.cs" />
-    <Compile Include="Migrations\201705170116107_UpdateAll7.Designer.cs">
-      <DependentUpon>201705170116107_UpdateAll7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705170121139_UpdateAll8.cs" />
-    <Compile Include="Migrations\201705170121139_UpdateAll8.Designer.cs">
-      <DependentUpon>201705170121139_UpdateAll8.cs</DependentUpon>
+    <Compile Include="Migrations\201705171908546_ChangeChhild.cs" />
+    <Compile Include="Migrations\201705171908546_ChangeChhild.Designer.cs">
+      <DependentUpon>201705171908546_ChangeChhild.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\BirthCertificateRepository.cs" />
+    <Compile Include="Repositories\ChildRepository.cs" />
     <Compile Include="Repositories\KindergartenRepository.cs" />
+    <Compile Include="Repositories\StaffRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -115,45 +86,18 @@
     <Content Include="Migrations\TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705161200034_Updatekin1.resx">
-      <DependentUpon>201705161200034_Updatekin1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705161204411_Updatekin2.resx">
-      <DependentUpon>201705161204411_Updatekin2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705162335482_UpdateAll.resx">
-      <DependentUpon>201705162335482_UpdateAll.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705170035167_UpdateAll1.resx">
-      <DependentUpon>201705170035167_UpdateAll1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705170043344_UpdateAll2.resx">
-      <DependentUpon>201705170043344_UpdateAll2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705170046125_UpdateAll3.resx">
-      <DependentUpon>201705170046125_UpdateAll3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705170052156_UpdateAll4.resx">
-      <DependentUpon>201705170052156_UpdateAll4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705170101066_UpdateAll5.resx">
-      <DependentUpon>201705170101066_UpdateAll5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705170102043_UpdateAll6.resx">
-      <DependentUpon>201705170102043_UpdateAll6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705170116107_UpdateAll7.resx">
-      <DependentUpon>201705170116107_UpdateAll7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705170121139_UpdateAll8.resx">
-      <DependentUpon>201705170121139_UpdateAll8.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\RegistrationSystem.Entities\RegistrationSystem.Entities.csproj">
       <Project>{c5ebb455-d568-4ebd-bd18-ee4d03025be6}</Project>
       <Name>RegistrationSystem.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705171632567_Cuscade_Delete.resx">
+      <DependentUpon>201705171632567_Cuscade_Delete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705171908546_ChangeChhild.resx">
+      <DependentUpon>201705171908546_ChangeChhild.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

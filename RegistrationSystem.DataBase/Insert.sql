@@ -15,14 +15,14 @@ SET IDENTITY_INSERT [dbo].[User] ON
 GO
 
 INSERT INTO [dbo].[Address]
-           ([City],[Street],[House],[Apartment],[District])
+           ([City],[Street],[House])
      VALUES
-           ('Львов','городоцька',345,23,3),
-		   ('Львов','патона',3,12,3),
-		   ('Львов','Висока',2,23,2),
-		   ('Львов','Мира',45,18,1),
-		   ('Львов','жовтнева',37,12,3),
-		   ('Львов','випасова',24,24,1)
+           ('Львов','городоцька',345),
+		   ('Львов','патона',3),
+		   ('Львов','Висока',2),
+		   ('Львов','Мира',45),
+		   ('Львов','жовтнева',37),
+		   ('Львов','випасова',24)
 GO
 
 USE [RegistrationSystem]
@@ -38,15 +38,11 @@ INSERT INTO [dbo].[StaffPosition]
 GO
 
 INSERT INTO [dbo].[Kindergarten]
-           ([AddressId],[Description],[Number])
+           ([Number],[Description],[AddressId])
      VALUES
-           (1,'просто садик',1),
-		   (3,'просто садик',4),
-		   (4,'просто садик',6),
-		   (2,'просто садик',8),
-		   (5,'просто садик',23),
-		   (6,'просто садик',32),
-		   (7,'просто садик',145)
+           (128,'Super 128 sadik',1),
+		   (114,'Super 114 sadik',2),
+		   (39,'Super 39 sadik',6)
 GO
 
 INSERT INTO [dbo].[Staff]

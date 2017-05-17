@@ -3,7 +3,7 @@ namespace RegistrationSystem.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Updatekin1 : DbMigration
+    public partial class Cuscade_Delete : DbMigration
     {
         public override void Up()
         {
@@ -21,6 +21,40 @@ namespace RegistrationSystem.DAL.Migrations
                         ChildId = c.Int(),
                     })
                 .PrimaryKey(t => t.AddressId);
+            
+            CreateTable(
+                "dbo.Child",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(nullable: false, maxLength: 50),
+                        LastName = c.String(nullable: false, maxLength: 50),
+                        MiddleName = c.String(nullable: false, maxLength: 50),
+                        DateOfBirth = c.DateTime(nullable: false),
+                        AddressId = c.Int(nullable: false),
+                        KindergartenId = c.Int(),
+                        User_UserId = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Address", t => t.AddressId, cascadeDelete: true)
+                .ForeignKey("dbo.Kindergarten", t => t.KindergartenId)
+                .ForeignKey("dbo.User", t => t.User_UserId)
+                .Index(t => t.AddressId)
+                .Index(t => t.KindergartenId)
+                .Index(t => t.User_UserId);
+            
+            CreateTable(
+                "dbo.BirthCertificate",
+                c => new
+                    {
+                        Id = c.Int(nullable: false),
+                        Series = c.String(nullable: false, maxLength: 4),
+                        Number = c.Int(nullable: false),
+                        Description = c.String(nullable: false, maxLength: 400),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Child", t => t.Id)
+                .Index(t => t.Id);
             
             CreateTable(
                 "dbo.Kindergarten",
@@ -58,55 +92,8 @@ namespace RegistrationSystem.DAL.Migrations
                         StaffPositionId = c.Int(nullable: false, identity: true),
                         PositionName = c.String(nullable: false, maxLength: 50),
                     })
-                .PrimaryKey(t => t.StaffPositionId);
-            
-            CreateTable(
-                "dbo.Child",
-                c => new
-                    {
-                        ChildId = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(nullable: false, maxLength: 50),
-                        LastName = c.String(nullable: false, maxLength: 50),
-                        MiddleName = c.String(nullable: false, maxLength: 50),
-                        SexOfChild = c.Int(nullable: false),
-                        DateOfBirth = c.DateTime(nullable: false),
-                        AddressId = c.Int(nullable: false),
-                        Kindergarten_KindergartenId = c.Int(),
-                    })
-                .PrimaryKey(t => t.ChildId)
-                .ForeignKey("dbo.Order", t => t.ChildId)
-                .ForeignKey("dbo.Kindergarten", t => t.Kindergarten_KindergartenId)
-                .ForeignKey("dbo.Address", t => t.AddressId, cascadeDelete: true)
-                .Index(t => t.ChildId)
-                .Index(t => t.AddressId)
-                .Index(t => t.Kindergarten_KindergartenId);
-            
-            CreateTable(
-                "dbo.BirthCertificate",
-                c => new
-                    {
-                        BirthCertificateId = c.Int(nullable: false, identity: true),
-                        Series = c.String(nullable: false, maxLength: 4),
-                        Number = c.Int(nullable: false),
-                        Description = c.String(nullable: false, maxLength: 400),
-                    })
-                .PrimaryKey(t => t.BirthCertificateId)
-                .ForeignKey("dbo.Child", t => t.BirthCertificateId)
-                .Index(t => t.BirthCertificateId);
-            
-            CreateTable(
-                "dbo.Order",
-                c => new
-                    {
-                        OrderId = c.Int(nullable: false, identity: true),
-                        UserId = c.Int(nullable: false),
-                        ChildId = c.Int(nullable: false),
-                        RegistrationTime = c.DateTime(nullable: false),
-                        KindergartenId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.OrderId)
-                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
-                .Index(t => new { t.UserId, t.ChildId }, unique: true, name: "IX_UserIdAndChildId");
+                .PrimaryKey(t => t.StaffPositionId)
+                .Index(t => t.PositionName, unique: true);
             
             CreateTable(
                 "dbo.User",
@@ -125,30 +112,28 @@ namespace RegistrationSystem.DAL.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Order", "UserId", "dbo.User");
-            DropForeignKey("dbo.Child", "AddressId", "dbo.Address");
-            DropForeignKey("dbo.Child", "Kindergarten_KindergartenId", "dbo.Kindergarten");
-            DropForeignKey("dbo.Child", "ChildId", "dbo.Order");
-            DropForeignKey("dbo.BirthCertificate", "BirthCertificateId", "dbo.Child");
+            DropForeignKey("dbo.Child", "User_UserId", "dbo.User");
             DropForeignKey("dbo.Staff", "StaffPositionId", "dbo.StaffPosition");
             DropForeignKey("dbo.Staff", "KindergartenId", "dbo.Kindergarten");
+            DropForeignKey("dbo.Child", "KindergartenId", "dbo.Kindergarten");
             DropForeignKey("dbo.Kindergarten", "AddressId", "dbo.Address");
+            DropForeignKey("dbo.BirthCertificate", "Id", "dbo.Child");
+            DropForeignKey("dbo.Child", "AddressId", "dbo.Address");
             DropIndex("dbo.User", new[] { "Login" });
-            DropIndex("dbo.Order", "IX_UserIdAndChildId");
-            DropIndex("dbo.BirthCertificate", new[] { "BirthCertificateId" });
-            DropIndex("dbo.Child", new[] { "Kindergarten_KindergartenId" });
-            DropIndex("dbo.Child", new[] { "AddressId" });
-            DropIndex("dbo.Child", new[] { "ChildId" });
+            DropIndex("dbo.StaffPosition", new[] { "PositionName" });
             DropIndex("dbo.Staff", new[] { "KindergartenId" });
             DropIndex("dbo.Staff", new[] { "StaffPositionId" });
             DropIndex("dbo.Kindergarten", new[] { "AddressId" });
+            DropIndex("dbo.BirthCertificate", new[] { "Id" });
+            DropIndex("dbo.Child", new[] { "User_UserId" });
+            DropIndex("dbo.Child", new[] { "KindergartenId" });
+            DropIndex("dbo.Child", new[] { "AddressId" });
             DropTable("dbo.User");
-            DropTable("dbo.Order");
-            DropTable("dbo.BirthCertificate");
-            DropTable("dbo.Child");
             DropTable("dbo.StaffPosition");
             DropTable("dbo.Staff");
             DropTable("dbo.Kindergarten");
+            DropTable("dbo.BirthCertificate");
+            DropTable("dbo.Child");
             DropTable("dbo.Address");
         }
     }

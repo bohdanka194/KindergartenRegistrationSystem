@@ -61,5 +61,6 @@
   <ItemGroup>
     <PreDeploy Include="Insert.sql" />
     <None Include="Create.sql" />
+    <None Include="Drop.sql" />
   </ItemGroup>
 </Project>

@@ -11,9 +11,9 @@ namespace RegistrationSystem.Entities
     public class Child
     {
         
-        [Key, ForeignKey("BirthCertificate")]
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ChildId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -27,27 +27,23 @@ namespace RegistrationSystem.Entities
         [StringLength(50)]
         public string MiddleName { get; set; }
 
-        //public int SexOfChild { get; set; }
-
         public DateTime DateOfBirth { get; set; }
 
         public int AddressId { get; set; }
 
-        public int? Kindergarten_KindergartenId { get; set; }
-
-        
-        public int BirthCertificateId { get; set; }
-
+        public int KindergartenId { get; set; }
 
         //navigation
 
         public virtual Address Address { get; set; }
 
-        [Required]
+        //[Required]
         public virtual BirthCertificate BirthCertificate { get; set; }
 
         public virtual Kindergarten Kindergarten { get; set; }
 
-        public virtual Order Order { get; set; }
+        public virtual User User { get; set; }
+
+        //public virtual Order Order { get; set; }
     }
 }

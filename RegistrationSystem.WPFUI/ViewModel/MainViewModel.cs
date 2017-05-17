@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using System;
+using System.Windows;
 
 namespace RegistrationSystem.WPFUI.ViewModel
 {
@@ -38,8 +39,30 @@ namespace RegistrationSystem.WPFUI.ViewModel
 
         private ICommand _addChildCommand;
         private ICommand _registrationChildCommand;
+        private ICommand _deleteCommand;
         private ChildModel _childModel;
+        private bool _text;
+        private bool isVisibleAll = true;
+        private bool _isVisibleAddChild = false;
 
+
+        public ICommand DeleteChildCommand
+        {
+            get
+            {
+                return _deleteCommand ?? (_deleteCommand = new RelayCommand((() =>
+                           {
+
+                               _unitOfWork.Delete(_childModel);
+                               MessageBoxResult message = MessageBox.Show("Delete");
+
+
+
+                           }
+                       )));
+            }
+            set { _deleteCommand = value; }
+        }
 
         public ICommand RegistrationChildCommand
         {
@@ -49,6 +72,9 @@ namespace RegistrationSystem.WPFUI.ViewModel
                            {
                                
                                _unitOfWork.RegistredChild(_childModel, _login);
+                               MessageBoxResult message = MessageBox.Show("Registred");
+                               IsVisibleAddChild = false;
+                               RaisePropertyChanged();
 
                            }
                        )));
@@ -69,8 +95,7 @@ namespace RegistrationSystem.WPFUI.ViewModel
             }
         }
 
-        private bool isVisibleAll = true;
-        private bool isVisibleAddChild = true;
+        
 
         public List<int> KindergartenNumber
         {
@@ -87,7 +112,7 @@ namespace RegistrationSystem.WPFUI.ViewModel
 
         
 
-        private bool _text;
+        
 
         public bool Text
         {
@@ -102,6 +127,7 @@ namespace RegistrationSystem.WPFUI.ViewModel
                 }
             }
         }
+      //
 
         public bool IsVisibleAll
         {
@@ -116,7 +142,7 @@ namespace RegistrationSystem.WPFUI.ViewModel
             }
         }
 
-        public ICommand AddRegPanelCommand
+        public ICommand AddRegPanelChildCommand
         {
             get
             {
@@ -132,12 +158,12 @@ namespace RegistrationSystem.WPFUI.ViewModel
 
         public bool IsVisibleAddChild
         {
-            get { return isVisibleAddChild; }
+            get { return _isVisibleAddChild; }
             set
             {
-                if (isVisibleAddChild != value)
+                if (_isVisibleAddChild != value)
                 {
-                    isVisibleAddChild = value;
+                    _isVisibleAddChild = value;
                     RaisePropertyChanged("isVisibleAddChild");
                 }
             }

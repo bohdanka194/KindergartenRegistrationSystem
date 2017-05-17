@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationSystem.Common", "RegistrationSystem.BLL\RegistrationSystem.Common.csproj", "{7F19C154-95C3-4461-BE85-B6B3A31C2AEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationSystem.Common", "RegistrationSystem.Common\RegistrationSystem.Common.csproj", "{7F19C154-95C3-4461-BE85-B6B3A31C2AEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationSystem.DAL", "RegistrationSystem.DAL\RegistrationSystem.DAL.csproj", "{CFA9A225-136E-4A46-9721-C2F47F08A0E9}"
 EndProject

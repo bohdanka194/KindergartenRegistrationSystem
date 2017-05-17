@@ -11,9 +11,9 @@ namespace RegistrationSystem.Entities
     public class BirthCertificate
     {
         
-        [Key, ForeignKey("Child")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int BirthCertificateId { get; set; }
+        
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
 
         [Required]
         [StringLength(4)]
@@ -24,8 +24,7 @@ namespace RegistrationSystem.Entities
         [Required]
         [StringLength(400)]
         public string Description { get; set; }
-        
-        [Required]
+
         public virtual Child Child { get; set; }
     }
 }

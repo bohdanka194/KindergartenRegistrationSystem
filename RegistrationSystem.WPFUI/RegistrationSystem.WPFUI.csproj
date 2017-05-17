@@ -149,7 +149,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RegistrationSystem.BLL\RegistrationSystem.Common.csproj">
+    <ProjectReference Include="..\RegistrationSystem.Common\RegistrationSystem.Common.csproj">
       <Project>{7f19c154-95c3-4461-be85-b6b3a31c2aeb}</Project>
       <Name>RegistrationSystem.Common</Name>
     </ProjectReference>

@@ -7,13 +7,13 @@ namespace RegistrationSystem.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UpdateAll4 : IMigrationMetadata
+    public sealed partial class Cuscade_Delete : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateAll4));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Cuscade_Delete));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705170052156_UpdateAll4"; }
+            get { return "201705171632567_Cuscade_Delete"; }
         }
         
         string IMigrationMetadata.Source

@@ -7,13 +7,13 @@ namespace RegistrationSystem.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UpdateAll5 : IMigrationMetadata
+    public sealed partial class ChangeChhild : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateAll5));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeChhild));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705170101066_UpdateAll5"; }
+            get { return "201705171908546_ChangeChhild"; }
         }
         
         string IMigrationMetadata.Source
