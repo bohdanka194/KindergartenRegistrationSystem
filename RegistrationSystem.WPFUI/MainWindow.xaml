@@ -3,10 +3,140 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RegistrationSystem.WPFUI"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        xmlns:main="clr-namespace:RegistrationSystem.WPFUI.ViewModel"
         
+        mc:Ignorable="d"
+        Title="MainWindow" Height="635.167" Width="1171.844">
+    <Window.DataContext>
+        <main:MainViewModel></main:MainViewModel>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  Margin="10,10,0,0" VerticalAlignment="Top" Width="440">
+            <Expander x:Name="expanderUser" Header="user"  VerticalAlignment="Top" IsExpanded="False" BorderBrush="Chocolate"  >
+                <StackPanel Margin="9,0,8,0" Height="61">
+                    <Button x:Name="buttonRegistrationChild" Content="Registration"  VerticalAlignment="Top" Width="75" />
+                    <Button x:Name="buttonEditChild" Content="Edit Child"  VerticalAlignment="Top" Width="75" />
+                    <Button x:Name="buttonAddChild" Content="Add Child"  VerticalAlignment="Top" Width="75" Command="{Binding AddCommand}" />
+                </StackPanel>
+            </Expander>
+            <Expander x:Name="expanderAdmin" Header="admin"  VerticalAlignment="Top" BorderBrush="Chocolate" IsExpanded="True">
+                <StackPanel Margin="9,0,8,0" Height="61">
+                    <Button x:Name="buttonAddKindergarten" Content="AddKindergarten"  VerticalAlignment="Top" Width="75" />
+                    <Button x:Name="buttonAddStaff" Content="AddStaff"  VerticalAlignment="Top" Width="75" />
+                    <Button x:Name="buttonAddPosition" Content="AddPosition"  VerticalAlignment="Top" Width="75" />
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="168" Margin="28,309,0,0" VerticalAlignment="Top" Width="579" Visibility="{Binding Path=IsVisibleAll, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid AutoGenerateColumns="False" x:Name="dataGarten" ItemsSource="{Binding KindergartensModels}" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="152" Width="61" Visibility="{Binding Path=IsVisibleAll, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Number}" Header="Number"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid AutoGenerateColumns="False" x:Name="dataAddress" ItemsSource="{Binding KindergartensModels}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="152" Width="430" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Number}" Header="Number"/>
+                    <DataGridTextColumn Binding="{Binding AddressModel.City}" Header="City"/>
+                    <DataGridTextColumn Binding="{Binding AddressModel.Street}" Header="Street"/>
+                    <DataGridTextColumn Binding="{Binding AddressModel.House}" Header="House"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="826,13,0,0" TextWrapping="Wrap" Text="{Binding Path=IsVisibleAll, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" />
+        <StackPanel x:Name="StackPanelAddChildOLD" Orientation="Vertical" HorizontalAlignment="Left" Height="205" Margin="657,291,0,0" VerticalAlignment="Top" Width="507" RenderTransformOrigin="2.305,-0.255" Visibility="{Binding Path=IsVisibleAddChild, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}">
+            <StackPanel Orientation="Horizontal">
+                <DataGrid AutoGenerateColumns="False" x:Name="dataAddChild" ItemsSource="{Binding ChildModel}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="64" Width="267" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding FirstName}" Header="FirstName"/>
+                        <DataGridTextColumn Binding="{Binding LastName}" Header="LastName"/>
+                        <DataGridTextColumn Binding="{Binding MiddleName}" Header="MiddleName"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DatePicker Height="26"></DatePicker>
+                <ComboBox Name="Kindergarten" Width="98"  ItemsSource="{Binding Path=KindergartenNumber}" >
+
+                </ComboBox>
+            </StackPanel>
+            <DataGrid AutoGenerateColumns="False" x:Name="dataAddAddress" ItemsSource="{Binding ChildModel}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="64" Width="403" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Address.City}" Header="City"/>
+                    <DataGridTextColumn Binding="{Binding Address.Street}" Header="Street"/>
+                    <DataGridTextColumn Binding="{Binding Address.House}" Header="House"/>
+                    <DataGridTextColumn Binding="{Binding Address.Apartment}" Header="Apartment"/>
+                    <DataGridTextColumn Binding="{Binding Address.District}" Header="District"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal">
+                <DataGrid AutoGenerateColumns="False" x:Name="dataAddCertificate"  ItemsSource="{Binding ChildModel}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="49"  >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding BirthCertificate.Series}" Header="Series"/>
+                        <DataGridTextColumn Binding="{Binding BirthCertificate.Number}" Header="Number"/>
+
+
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBox x:Name="textBoxDescriptinCertificate"   HorizontalAlignment="Left"  TextWrapping="Wrap" Text="{Binding Path=IsVisibleAll, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="306" Height="74" />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Name="StackPanelAddChild" HorizontalAlignment="Left" Height="130" Margin="93,124,0,0" VerticalAlignment="Top" Width="1001">
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildName" Content="Name"></Label>
+                <TextBox x:Name="BoxChildName" Text="{Binding ChildModel.FirstName }" Height="24"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildLastName" Content="LastName"></Label>
+                <TextBox x:Name="BoxChildLastName" Text="{Binding ChildModel.LastName}" Height="24"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildMiddleName" Content="MiddleName"></Label>
+                <TextBox x:Name="BoxChildMiddleName" Text="{Binding ChildModel.MiddleName}" Height="24"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildBirthDay" Content="BirthDay"></Label>
+                <DatePicker Name="DatePickerBirthDay" SelectedDate="{Binding ChildModel.DateOfBirth, Mode=TwoWay}" Text="01.01.2000" ></DatePicker>
+
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildCity" Content="City"></Label>
+                <TextBox x:Name="BoxChildCity" Text="{Binding ChildModel.City}" Height="24"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildStreet" Content="Street"></Label>
+                <TextBox x:Name="BoxChildStreet" Text="{Binding ChildModel.Street}" Height="24"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildHouse" Content="House"></Label>
+                <TextBox x:Name="BoxChildHouse" Text="{Binding ChildModel.House}" Height="24"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildApartment" Content="Apartment"></Label>
+                <TextBox x:Name="BoxChildApartment" Text="{Binding ChildModel.Apartment}" Height="24"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildCerSer" Content="Certificate Series"></Label>
+                <TextBox x:Name="BoxChildCerSer" Text="{Binding ChildModel.Series}" Height="24"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildCerNum" Content="Certificate Number"></Label>
+                <TextBox x:Name="BoxChildCerNum" Text="{Binding ChildModel.Number}" Height="24"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildCerDescription" Content="Certificate Description"></Label>
+                <TextBox x:Name="BoxChildCerDescription" Text="{Binding ChildModel.Description}" Height="99" MaxWidth="120" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Name="ChildGartenNumber" Content="Kindergarten"></Label>
+                <ComboBox x:Name="BoxChildGartenNumber" ItemsSource="{Binding KindergartenNumber}" SelectedValue="{Binding ChildModel.KindergartenNumber}" />
+
+            </StackPanel>
+            <StackPanel>
+                <Button x:Name="ButtonAddChild" Content="Registration" Command="{Binding RegistrationChildCommand}" Height="48"/>
+            </StackPanel>
+        </StackPanel>
+        <Label x:Name="label" Content="asdasd" HorizontalAlignment="Left" Margin="630,36,0,0" VerticalAlignment="Top" Width="132"/>
+
+
     </Grid>
 </Window>
+

@@ -1,0 +1,5 @@
+﻿Enable-Migrations -ProjectName "RegistrationSystem.DAL" -StartUpProjectName "RegistrationSystem.WPFUI"
+
+update-database -ProjectName "RegistrationSystem.DAL" -StartUpProjectName "RegistrationSystem.WPFUI"
+
+add-migration "UpdateStaff" -ProjectName "RegistrationSystem.DAL" -StartUpProjectName "RegistrationSystem.WPFUI"

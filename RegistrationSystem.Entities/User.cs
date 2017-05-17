@@ -12,26 +12,26 @@ namespace RegistrationSystem.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int UserId { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [StringLength(50)]
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [StringLength(50)]
         public string LastName { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [StringLength(20)]
         [Index(IsUnique = true)]
         public string Login { get; set; }
 
         [Required]
-        [MaxLength(30)]
+        [StringLength(80)]
         public string Password { get; set; }
 
-        //navigation
-        public ICollection<Order> Orders { get; set; }
+        
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
