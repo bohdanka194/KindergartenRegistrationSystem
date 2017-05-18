@@ -20,8 +20,8 @@ namespace RegistrationSystem.WPFUI.ViewModel
         public string Login { get; set; }
         public string PassWord { get; set; }
 
-        private UnitOfWork unitOfWork = new UnitOfWork();
-        private IEnumerable<User> users;
+        private UnitOfWork _unitOfWork = new UnitOfWork();
+        //private IEnumerable<User> users;
 
         private ICommand _backcCommand;
         private ICommand _registCommand;
@@ -46,9 +46,9 @@ namespace RegistrationSystem.WPFUI.ViewModel
             {
                 return _registCommand ?? (_registCommand = new RelayCommand((() =>
                 {
-                    if (IsValidLogin(users))
+                    if (IsValidLogin(Login))
                     {
-                        unitOfWork.AddUser(new User()
+                        _unitOfWork.AddUser(new User()
                         {
                             FirstName = Name,
                             LastName = LastName,
@@ -69,17 +69,10 @@ namespace RegistrationSystem.WPFUI.ViewModel
             set { _backcCommand = value; }
         }
 
-        public bool IsValidLogin(IEnumerable<User> users )
+        public bool IsValidLogin(string login )
         {
-            users = unitOfWork.GetUser();
-            foreach (var user in users)
-            {
-                if (Login == user.Login)
-                {
-                    return false;
-                }
-            }
-            return true;
+           return _unitOfWork.IsAvailableLogin(login);
+            
         }
     }
 }

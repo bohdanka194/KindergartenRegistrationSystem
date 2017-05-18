@@ -30,10 +30,9 @@ namespace RegistrationSystem.WPFUI.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private string _login = "admin";
-        private UnitOfWork _unitOfWork = new UnitOfWork();
-        public IEnumerable<User> Users { get; set; }
-        public IEnumerable<KindergartenModel> KindergartensModels { get; set; }
+        private string _login = "admin"; //Отвязать !!!!!!!!!!!!
+        private UnitOfWork _unitOfWork;
+       
 
         private List<int> _KindergartenNumber;
 
@@ -43,7 +42,13 @@ namespace RegistrationSystem.WPFUI.ViewModel
         private ChildModel _childModel;
         private bool _text;
         private bool isVisibleAll = true;
-        private bool _isVisibleAddChild = false;
+        private bool _isVisibleAddChild = true; //change false
+        private KindergartenModel _kModel;
+        private IEnumerable<StaffModel> _staffModels;
+
+        //public IEnumerable<User> Users { get; set; }
+        public IEnumerable<KindergartenModel> KindergartensModels { get; set; }
+        
 
 
         public ICommand DeleteChildCommand
@@ -95,7 +100,20 @@ namespace RegistrationSystem.WPFUI.ViewModel
             }
         }
 
-        
+        public IEnumerable<StaffModel> StaffModels
+        {
+            get { return _staffModels; }
+            set
+            {
+                if (_staffModels != value)
+                {
+                    _staffModels = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+
 
         public List<int> KindergartenNumber
         {
@@ -169,10 +187,25 @@ namespace RegistrationSystem.WPFUI.ViewModel
             }
         }
 
+        public KindergartenModel KModel
+        {
+            get { return _kModel; }
+            set
+            {
+                if (_kModel != value)
+                {
+                    _kModel = value;
+                    StaffModels = _unitOfWork.GetStaffModel(_kModel.Number);
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
 
         public MainViewModel()
         {
-            Users = _unitOfWork.GetUser();
+            _unitOfWork = new UnitOfWork();
+            //Users = _unitOfWork.GetUser();
             KindergartensModels = _unitOfWork.GetKindergartenModels();
             GetgartenNumber();
 

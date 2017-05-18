@@ -27,8 +27,8 @@
                 </StackPanel>
             </Expander>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="168" Margin="244,345,0,0" VerticalAlignment="Top" Width="579" Visibility="{Binding Path=IsVisibleAll, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}">
-            <DataGrid AutoGenerateColumns="False" x:Name="dataAddress" ItemsSource="{Binding KindergartensModels}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="152" Width="430" >
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="168" Margin="157,342,0,0" VerticalAlignment="Top" Width="884" Visibility="{Binding Path=IsVisibleAll, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid AutoGenerateColumns="False" x:Name="dataAddress" ItemsSource="{Binding KindergartensModels}" SelectedItem="{Binding KModel}" HorizontalAlignment="Left" VerticalAlignment="Top"   >
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Number}" Header="Number"/>
                     <DataGridTextColumn Binding="{Binding AddressModel.City}" Header="City"/>
@@ -36,6 +36,18 @@
                     <DataGridTextColumn Binding="{Binding AddressModel.House}" Header="House"/>
                 </DataGrid.Columns>
             </DataGrid>
+            <StackPanel HorizontalAlignment="Left" Height="152" VerticalAlignment="Top" Width="241" >
+                <TextBox x:Name="Discription" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Height="175" Text="{Binding KModel.Number}" />
+            </StackPanel>
+            <StackPanel x:Name="Staff" Width="420">
+                <DataGrid AutoGenerateColumns="False" x:Name="DataGridStaff" ItemsSource="{Binding StaffModels}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="260" Height="168">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding FirstName}" Header="FirstName"/>
+                        <DataGridTextColumn Binding="{Binding LastNAme}" Header="LastName"/>
+                        <DataGridTextColumn Binding="{Binding Position}" Header="Position"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
         </StackPanel>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="826,13,0,0" TextWrapping="Wrap" Text="{Binding Path=IsVisibleAll, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" />
         <StackPanel x:Name="StackPanelAddChildOLD" Orientation="Vertical" HorizontalAlignment="Left" Height="205" Margin="1075,-149,-418,0" VerticalAlignment="Top" Width="507" RenderTransformOrigin="2.305,-0.255" Visibility="{Binding Path=IsVisibleAddChild, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}">
@@ -131,7 +143,6 @@
         </StackPanel>
         <Label x:Name="label" Content="asdasd" HorizontalAlignment="Left" Margin="630,36,0,0" VerticalAlignment="Top" Width="132"/>
         <Button x:Name="buttonDelete" Content="Delete" Command="{Binding DeleteChildCommand}" HorizontalAlignment="Left" Margin="538,36,0,0" VerticalAlignment="Top" Width="75"/>
-        <StackPanel HorizontalAlignment="Left" Height="116" Margin="720,370,0,0" VerticalAlignment="Top" Width="406" />
 
 
     </Grid>

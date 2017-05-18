@@ -26,5 +26,9 @@ namespace RegistrationSystem.DAL.DTO
       //  public ICollection<Staff> Staves { get; set; }
 
         public AddressDTO Address { get; set; }
+
+        public StaffDTO StaffDto { get; set; }
     }
+
+   
 }

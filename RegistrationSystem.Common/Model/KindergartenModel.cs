@@ -22,6 +22,8 @@ namespace RegistrationSystem.Common.Model
 
         public AddressModel AddressModel { get; set; }
 
+        public StaffModel StaffModel { get; set; }
+
 
         //Navigation properties
 

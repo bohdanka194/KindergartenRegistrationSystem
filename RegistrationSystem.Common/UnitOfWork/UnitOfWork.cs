@@ -12,25 +12,30 @@ namespace RegistrationSystem.Common.UnitOfWork
     public class UnitOfWork
     {
 
-        
+
         private AddressRepository _addressRepository = new AddressRepository();
         private BirthCertificateRepository _sertificateRepositoryrepository = new BirthCertificateRepository();
         private ChildRepository _childRepository = new ChildRepository();
         private KindergartenRepository _kindergartenRepository = new KindergartenRepository();
         private StaffRepository _staffRepository = new StaffRepository();
         private UserRepository _userRepository = new UserRepository();
-        
+
 
 
 
         private IRepository<Staff> staffRepository;
         private IRepository<StaffPosition> positionRepository;
-        
 
 
-        public IEnumerable<User> GetUser()
+
+        public bool IsUserExistInBase(string login, string password)
         {
-            return new List<User>();
+            return _userRepository.IsUserExist(login, password);
+        }
+
+        public bool IsAvailableLogin(string login)
+        {
+            return _userRepository.IsLoginAvailable(login);
         }
 
         public void AddUser(User user)
@@ -41,21 +46,6 @@ namespace RegistrationSystem.Common.UnitOfWork
 
         public void RegistredChild(ChildModel model, string login)
         {
-            //ChildModel model = new ChildModel();
-
-            //model.Number = 8888;
-            //model.Apartment = 12;
-            //model.DateOfBirth = DateTime.Now;
-            //model.Description = "франківським РВЦМВС 13";
-            //model.FirstName = "Sergey";
-            //model.LastName = "Barina";
-            //model.MiddleName = "Sergeevna";
-            //model.Series = "aa";
-            //model.Street = "gorodocka";
-            //model.City = "Lvov";
-            //model.House = 3;
-           
-
             Child child = new Child()
             {
                 FirstName = model.FirstName,
@@ -68,7 +58,7 @@ namespace RegistrationSystem.Common.UnitOfWork
                     House = model.House,
                     Street = model.Street,
                     Apartment = model.Apartment,
-                     
+
                 },
                 BirthCertificate = new BirthCertificate()
                 {
@@ -76,22 +66,19 @@ namespace RegistrationSystem.Common.UnitOfWork
                     Description = model.Description,
                     Series = model.Series
                 },
-                
+            };
 
-        };
+            _childRepository.AddChild(child, login, model.KindergartenNumber);
 
-            _childRepository.AddChild(child,login,model.KindergartenNumber);
-            
-
-            }
+        }
 
         public void Delete(ChildModel _childModel)
         {
             using (_childRepository = new ChildRepository())
             {
                 Child child = (_childRepository.FindBy(child1 => child1.Id == 1)).First();
-                
-               
+
+
                 _childRepository.Delete(child);
                 _childRepository.Save();
             }
@@ -99,31 +86,40 @@ namespace RegistrationSystem.Common.UnitOfWork
 
         public IEnumerable<KindergartenModel> GetKindergartenModels()
         {
-            List<KindergartenModel> modelsList = new List<KindergartenModel>();
-            using
+            var modelsList = new List<KindergartenModel>();
 
-            (_kindergartenRepository = new KindergartenRepository())
+
+            foreach (var model in _kindergartenRepository.GetKindergartens())
             {
-                var result = _kindergartenRepository.GetKindergartens().ToList();
-
-                foreach (var garten in result)
+                modelsList.Add(new KindergartenModel()
                 {
-                    modelsList.Add(new KindergartenModel()
+                    Number = model.Number,
+                    Description = model.Description,
+                    AddressModel = new AddressModel()
                     {
-                        Number = garten.Number,
-                        Description = garten.Description,
-                        AddressModel = new AddressModel()
-                        {
-                            City = garten.Address.City,
-                            Street = garten.Address.Street,
-                            House = garten.Address.House
-                        }
-                    });
-
-                }
-                return modelsList;
+                        Apartment = model.Address.Apartment,
+                        City = model.Address.City,
+                        House = model.Address.House,
+                        Street = model.Address.Street
+                    }
+                });
             }
+            return modelsList;
+        }
+
+        public IEnumerable<StaffModel> GetStaffModel(int number)
+        {
+            var modelsList = new List<StaffModel>();
+            foreach (var model in _staffRepository.GetCurrentStaff(number))
+            {
+                modelsList.Add(new StaffModel()
+                {
+                   FirstName = model.FirstName,
+                   LastNAme = model.LastName,
+                   Position = model.Position
+                });
+            }
+            return modelsList;
         }
     }
 }
-

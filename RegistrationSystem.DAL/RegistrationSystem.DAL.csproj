@@ -54,6 +54,7 @@
     <Compile Include="Concrete\EFDataContext.cs" />
     <Compile Include="DTO\AddressDTO.cs" />
     <Compile Include="DTO\KindergartenDTO.cs" />
+    <Compile Include="DTO\StaffDTO.cs" />
     <Compile Include="Interfaces\IChildRepository.cs" />
     <Compile Include="Interfaces\IKindetgartenRepository.cs" />
     <Compile Include="Interfaces\IStaffRepository.cs" />
@@ -66,6 +67,10 @@
     <Compile Include="Migrations\201705171908546_ChangeChhild.cs" />
     <Compile Include="Migrations\201705171908546_ChangeChhild.Designer.cs">
       <DependentUpon>201705171908546_ChangeChhild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705172129370_ChangeContext1.cs" />
+    <Compile Include="Migrations\201705172129370_ChangeContext1.Designer.cs">
+      <DependentUpon>201705172129370_ChangeContext1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705171908546_ChangeChhild.resx">
       <DependentUpon>201705171908546_ChangeChhild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705172129370_ChangeContext1.resx">
+      <DependentUpon>201705172129370_ChangeContext1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

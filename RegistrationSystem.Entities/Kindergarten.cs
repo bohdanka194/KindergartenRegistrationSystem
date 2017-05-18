@@ -14,7 +14,8 @@ namespace RegistrationSystem.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int KindergartenId { get; set; }
 
-        [Required]
+        
+        [Index(IsUnique = true)]
         public int Number { get; set; }
 
         public string Description { get; set; }

@@ -19,27 +19,23 @@ namespace RegistrationSystem.DAL.Repositories
 
         public IQueryable<KindergartenDTO> GetKindergartens()
         {
-            var result = from kin in Context.Kindergartens
-                join add in Context.Addresses
-                on kin.AddressId equals add.AddressId
+            var garten = from kin in Context.Kindergartens
+                join add in Context.Addresses on kin.AddressId equals add.AddressId
+                join staf in Context.Staves on kin.KindergartenId equals staf.KindergartenId
+                join stafP in Context.StaffPositions on staf.StaffPositionId equals stafP.StaffPositionId
                 select new KindergartenDTO()
                 {
                     Number = kin.Number,
                     Description = kin.Description,
                     Address = new AddressDTO()
                     {
+                        Apartment = add.Apartment,
                         City = add.City,
-                        Street = add.Street,
-                        House = add.House
+                        House = add.House,
+                        Street = add.Street
                     }
                 };
-                          
-       
-
-            return result;
-
-
-
+            return garten;
         }
     }
 }

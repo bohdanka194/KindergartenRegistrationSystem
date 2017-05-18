@@ -16,14 +16,14 @@ namespace RegistrationSystem.WPFUI.ViewModel
     {
         public Action CloseAction { get; set; }
 
-        private UnitOfWork unitOfWork = new UnitOfWork();
-        private IEnumerable<User> users;
+        private UnitOfWork _unitOfWork = new UnitOfWork();
+        //private IEnumerable<User> users;
         public string Login { get; set; }
         public string Password { get; set; }
 
         private ICommand _loginCommand;
         private ICommand _registrationCommand;
-        
+
 
         public ICommand LoginCommand
         {
@@ -31,8 +31,8 @@ namespace RegistrationSystem.WPFUI.ViewModel
             {
                 return _loginCommand ?? (_loginCommand = new RelayCommand((() =>
                 {
-                    users = unitOfWork.GetUser();
-                    if (users.Any() && IsUserExist(users))
+
+                    if (IsUserExist(Login, Password))
                     {
                         var mainWindow = new MainWindow();
                         mainWindow.Show();
@@ -41,21 +41,21 @@ namespace RegistrationSystem.WPFUI.ViewModel
                 })));
             }
 
-            set
-            {
-                _loginCommand = value;
-            }
+            set { _loginCommand = value; }
         }
 
         public ICommand RegistrationCommand
         {
-            get { return _registrationCommand ?? (_registrationCommand = new RelayCommand((() =>
+            get
             {
-                var regVindow  = new RegistrationWindow();
-                regVindow.Show();
-                CloseAction();
+                return _registrationCommand ?? (_registrationCommand = new RelayCommand((() =>
+                {
+                    var regVindow = new RegistrationWindow();
+                    regVindow.Show();
+                    CloseAction();
 
-            }))); }
+                })));
+            }
             set { _registrationCommand = value; }
         }
 
@@ -72,21 +72,12 @@ namespace RegistrationSystem.WPFUI.ViewModel
 
         }
 
-        private bool IsUserExist(IEnumerable<User> users)
+        private bool IsUserExist(string login, string password)
         {
-            var login = Login;
-            var password = Encrypt.GenerateHash(Password, Login);
-            foreach (var user in users)
-            {
-                if (Login == user.Login && password == user.Password)
-                {
-                    return true;
-                    
-                }
-            }
-            return false;
-        }
 
-        
+            password = Encrypt.GenerateHash(password, login);
+
+            return _unitOfWork.IsUserExistInBase(login, password);
+        }
     }
 }
