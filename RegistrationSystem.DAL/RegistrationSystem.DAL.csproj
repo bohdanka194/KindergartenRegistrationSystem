@@ -53,6 +53,7 @@
     <Compile Include="Concrete\EfBaseRepositoty.cs" />
     <Compile Include="Concrete\EFDataContext.cs" />
     <Compile Include="DTO\AddressDTO.cs" />
+    <Compile Include="DTO\ChildDTO.cs" />
     <Compile Include="DTO\KindergartenDTO.cs" />
     <Compile Include="DTO\StaffDTO.cs" />
     <Compile Include="Interfaces\IChildRepository.cs" />
@@ -71,6 +72,14 @@
     <Compile Include="Migrations\201705172129370_ChangeContext1.cs" />
     <Compile Include="Migrations\201705172129370_ChangeContext1.Designer.cs">
       <DependentUpon>201705172129370_ChangeContext1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705180822077_reg_time.cs" />
+    <Compile Include="Migrations\201705180822077_reg_time.Designer.cs">
+      <DependentUpon>201705180822077_reg_time.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705180830306_reg_time1.cs" />
+    <Compile Include="Migrations\201705180830306_reg_time1.Designer.cs">
+      <DependentUpon>201705180830306_reg_time1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,6 +114,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705172129370_ChangeContext1.resx">
       <DependentUpon>201705172129370_ChangeContext1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705180822077_reg_time.resx">
+      <DependentUpon>201705180822077_reg_time.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705180830306_reg_time1.resx">
+      <DependentUpon>201705180830306_reg_time1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

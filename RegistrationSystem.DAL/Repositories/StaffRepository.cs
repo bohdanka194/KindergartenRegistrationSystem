@@ -21,7 +21,6 @@ namespace RegistrationSystem.DAL.Repositories
 
         public IEnumerable<StaffDTO> GetCurrentStaff(int number)
         {
-
             var result = from staff in Context.Staves
                 join kin in Context.Kindergartens on staff.KindergartenId equals kin.KindergartenId
                 join pos in Context.StaffPositions on staff.StaffPositionId equals pos.StaffPositionId
@@ -33,8 +32,6 @@ namespace RegistrationSystem.DAL.Repositories
                     Position = pos.PositionName
                 };
             return result;
-
-
         }
 
         public void SaveOrder()

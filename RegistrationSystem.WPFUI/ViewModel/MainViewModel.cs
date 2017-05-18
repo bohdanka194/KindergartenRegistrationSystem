@@ -30,9 +30,9 @@ namespace RegistrationSystem.WPFUI.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private string _login = "admin"; //Отвязать !!!!!!!!!!!!
+
+        private string _login; 
         private UnitOfWork _unitOfWork;
-       
 
         private List<int> _KindergartenNumber;
 
@@ -40,16 +40,21 @@ namespace RegistrationSystem.WPFUI.ViewModel
         private ICommand _registrationChildCommand;
         private ICommand _deleteCommand;
         private ChildModel _childModel;
+        private IEnumerable<ChildModel> _childrenModel;
         private bool _text;
-        private bool isVisibleAll = true;
-        private bool _isVisibleAddChild = true; //change false
+        private bool _isVisibleAll = true;
+        private bool _isVisibleAddChild = false;
         private KindergartenModel _kModel;
         private IEnumerable<StaffModel> _staffModels;
 
-        //public IEnumerable<User> Users { get; set; }
-        public IEnumerable<KindergartenModel> KindergartensModels { get; set; }
         
+        public IEnumerable<KindergartenModel> KindergartensModels { get; set; }
 
+        public string Login
+        {
+            get { return $"Hello " + _login; }
+            set { _login = value; }
+        }
 
         public ICommand DeleteChildCommand
         {
@@ -57,12 +62,8 @@ namespace RegistrationSystem.WPFUI.ViewModel
             {
                 return _deleteCommand ?? (_deleteCommand = new RelayCommand((() =>
                            {
-
                                _unitOfWork.Delete(_childModel);
                                MessageBoxResult message = MessageBox.Show("Delete");
-
-
-
                            }
                        )));
             }
@@ -75,12 +76,11 @@ namespace RegistrationSystem.WPFUI.ViewModel
             {
                 return _registrationChildCommand ?? (_registrationChildCommand = new RelayCommand((() =>
                            {
-                               
                                _unitOfWork.RegistredChild(_childModel, _login);
                                MessageBoxResult message = MessageBox.Show("Registred");
                                IsVisibleAddChild = false;
+                               IsVisibleAll = true;
                                RaisePropertyChanged();
-
                            }
                        )));
             }
@@ -99,6 +99,18 @@ namespace RegistrationSystem.WPFUI.ViewModel
                 }
             }
         }
+        public IEnumerable<ChildModel> ChildrenModel
+        {
+            get { return _childrenModel; }
+            set
+            {
+                if (_childrenModel != value)
+                {
+                    _childrenModel = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
 
         public IEnumerable<StaffModel> StaffModels
         {
@@ -113,8 +125,6 @@ namespace RegistrationSystem.WPFUI.ViewModel
             }
         }
 
-
-
         public List<int> KindergartenNumber
         {
             get { return _KindergartenNumber; }
@@ -128,19 +138,15 @@ namespace RegistrationSystem.WPFUI.ViewModel
             }
         }
 
-        
-
-        
-
         public bool Text
         {
             
-            get { return isVisibleAll; }
+            get { return _isVisibleAll; }
             set
             {
-                if (isVisibleAll != value)
+                if (_isVisibleAll != value)
                 {
-                    isVisibleAll = value;
+                    _isVisibleAll = value;
                     RaisePropertyChanged();
                 }
             }
@@ -149,12 +155,12 @@ namespace RegistrationSystem.WPFUI.ViewModel
 
         public bool IsVisibleAll
         {
-            get { return isVisibleAll; }
+            get { return _isVisibleAll; }
             set
             {
-                if (isVisibleAll != value)
+                if (_isVisibleAll != value)
                 {
-                    isVisibleAll = value;
+                    _isVisibleAll = value;
                     RaisePropertyChanged("IsVisibleAll");
                 }
             }
@@ -196,25 +202,26 @@ namespace RegistrationSystem.WPFUI.ViewModel
                 {
                     _kModel = value;
                     StaffModels = _unitOfWork.GetStaffModel(_kModel.Number);
+                    ChildrenModel = _unitOfWork.GetChildrenModel(_kModel.Number);
                     RaisePropertyChanged();
                 }
             }
         }
 
 
-        public MainViewModel()
+        public MainViewModel(string login)
         {
             _unitOfWork = new UnitOfWork();
-            //Users = _unitOfWork.GetUser();
             KindergartensModels = _unitOfWork.GetKindergartenModels();
             GetgartenNumber();
-
-               
-            
+            _login = login;
 
             RaisePropertyChanged();
 
         }
+        public MainViewModel()
+        { }
+       
 
         private void GetgartenNumber()
         {

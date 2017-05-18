@@ -34,10 +34,15 @@ namespace RegistrationSystem.WPFUI.ViewModel
 
                     if (IsUserExist(Login, Password))
                     {
-                        var mainWindow = new MainWindow();
+                        var mainWindow = new MainWindow(Login);
                         mainWindow.Show();
                         CloseAction();
                     }
+                    else
+                    {
+                        MessageBox.Show("User does not exist");
+                    }
+                    
                 })));
             }
 

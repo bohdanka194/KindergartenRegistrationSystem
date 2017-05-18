@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RegistrationSystem.WPFUI.ViewModel;
 
 namespace RegistrationSystem.WPFUI
 {
@@ -19,12 +20,14 @@ namespace RegistrationSystem.WPFUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(string login)
         {
             InitializeComponent();
-            
+            Loaded += (sender, args) =>
+            {
+                MainViewModel vm = new MainViewModel(login);
+                this.DataContext = vm;
+            };
         }
-
-       
     }
 }

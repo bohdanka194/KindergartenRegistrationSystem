@@ -10,6 +10,6 @@ namespace RegistrationSystem.DAL.Interfaces
 {
     interface IKindetgartenRepository
     {
-        IQueryable<KindergartenDTO> GetKindergartens();
+        IEnumerable<Kindergarten> GetKindergartens();
     }
 }
