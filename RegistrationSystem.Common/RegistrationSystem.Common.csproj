@@ -56,7 +56,6 @@
     <Compile Include="Model\StaffModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork\Encrypt.cs" />
-    <Compile Include="UnitOfWork\Group.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

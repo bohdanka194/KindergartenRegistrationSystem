@@ -7,7 +7,7 @@
         
         mc:Ignorable="d"
         Title="{Binding Login}" Height="635.167" Width="1243.844"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.DataContext>
         <main:MainViewModel></main:MainViewModel>
     </Window.DataContext>
@@ -131,6 +131,7 @@
             </DataGrid>
 
         </StackPanel>
+        <Label x:Name="label" FontSize="20" Content="Select kindergarten for more information." HorizontalAlignment="Center" Margin="435,524,396,0" VerticalAlignment="Top" Visibility="{Binding Path=IsVisibleAll, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}" Width="407"/>
 
 
     </Grid>

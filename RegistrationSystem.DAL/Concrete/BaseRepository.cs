@@ -9,7 +9,5 @@ namespace RegistrationSystem.DAL.Concrete
     public class BaseRepository
     {
         EfDataContext context = new EfDataContext(); 
-
-        
     }
 }

@@ -16,7 +16,7 @@ namespace RegistrationSystem.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(4)]
+        [StringLength(20)]
         public string Series { get; set; }
 
         public int Number { get; set; }

@@ -42,8 +42,5 @@ namespace RegistrationSystem.DAL.Repositories
             }
             return true;
         }
-
-
-
     }
 }

@@ -13,18 +13,16 @@ namespace RegistrationSystem.WPFUI.ViewModel
 {
     public class RegistrationViewModel
     {
-        public Action CloseAction { get; set; }
+        private UnitOfWork _unitOfWork = new UnitOfWork();
 
+        private ICommand _backcCommand;
+        private ICommand _registCommand;
+
+        public Action CloseAction { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Login { get; set; }
         public string PassWord { get; set; }
-
-        private UnitOfWork _unitOfWork = new UnitOfWork();
-        //private IEnumerable<User> users;
-
-        private ICommand _backcCommand;
-        private ICommand _registCommand;
 
         public ICommand BackToLoginCommand
         {
@@ -40,6 +38,7 @@ namespace RegistrationSystem.WPFUI.ViewModel
             }
             set { _backcCommand = value; }
         }
+
         public ICommand RegistrationCommand
         {
             get
@@ -53,7 +52,7 @@ namespace RegistrationSystem.WPFUI.ViewModel
                             FirstName = Name,
                             LastName = LastName,
                             Login = Login,
-                            Password = Encrypt.GenerateHash(PassWord,Login)
+                            Password = Encrypt.GenerateHash(PassWord, Login)
                         });
                         MessageBox.Show("New user created!");
                         var logVindow = new LoginWindow();
@@ -69,10 +68,9 @@ namespace RegistrationSystem.WPFUI.ViewModel
             set { _backcCommand = value; }
         }
 
-        public bool IsValidLogin(string login )
+        public bool IsValidLogin(string login)
         {
-           return _unitOfWork.IsAvailableLogin(login);
-            
+            return _unitOfWork.IsAvailableLogin(login);
         }
     }
 }

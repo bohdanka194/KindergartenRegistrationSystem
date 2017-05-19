@@ -6,7 +6,7 @@
         xmlns:regis="clr-namespace:RegistrationSystem.WPFUI.ViewModel"
         mc:Ignorable="d"
         Title="RegistrationWindow" Height="300" Width="524.752"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.DataContext>
         <regis:RegistrationViewModel/>
     </Window.DataContext>

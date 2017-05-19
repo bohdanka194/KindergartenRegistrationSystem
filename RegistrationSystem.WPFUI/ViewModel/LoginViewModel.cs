@@ -17,7 +17,7 @@ namespace RegistrationSystem.WPFUI.ViewModel
         public Action CloseAction { get; set; }
 
         private UnitOfWork _unitOfWork = new UnitOfWork();
-        //private IEnumerable<User> users;
+
         public string Login { get; set; }
         public string Password { get; set; }
 
@@ -42,7 +42,7 @@ namespace RegistrationSystem.WPFUI.ViewModel
                     {
                         MessageBox.Show("User does not exist");
                     }
-                    
+
                 })));
             }
 
@@ -58,7 +58,6 @@ namespace RegistrationSystem.WPFUI.ViewModel
                     var regVindow = new RegistrationWindow();
                     regVindow.Show();
                     CloseAction();
-
                 })));
             }
             set { _registrationCommand = value; }
@@ -71,7 +70,6 @@ namespace RegistrationSystem.WPFUI.ViewModel
                 return new RelayCommand((() =>
                 {
                     Application.Current.Shutdown();
-
                 }));
             }
 
@@ -79,7 +77,6 @@ namespace RegistrationSystem.WPFUI.ViewModel
 
         private bool IsUserExist(string login, string password)
         {
-
             password = Encrypt.GenerateHash(password, login);
 
             return _unitOfWork.IsUserExistInBase(login, password);

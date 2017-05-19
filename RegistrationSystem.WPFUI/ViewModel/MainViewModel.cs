@@ -31,10 +31,10 @@ namespace RegistrationSystem.WPFUI.ViewModel
     public class MainViewModel : ViewModelBase
     {
 
-        private string _login; 
+        private string _login;
         private UnitOfWork _unitOfWork;
 
-        private List<int> _KindergartenNumber;
+        private List<int> _kindergartenNumber;
 
         private ICommand _addChildCommand;
         private ICommand _registrationChildCommand;
@@ -47,7 +47,7 @@ namespace RegistrationSystem.WPFUI.ViewModel
         private KindergartenModel _kModel;
         private IEnumerable<StaffModel> _staffModels;
 
-        
+
         public IEnumerable<KindergartenModel> KindergartensModels { get; set; }
 
         public string Login
@@ -99,6 +99,7 @@ namespace RegistrationSystem.WPFUI.ViewModel
                 }
             }
         }
+
         public IEnumerable<ChildModel> ChildrenModel
         {
             get { return _childrenModel; }
@@ -127,12 +128,12 @@ namespace RegistrationSystem.WPFUI.ViewModel
 
         public List<int> KindergartenNumber
         {
-            get { return _KindergartenNumber; }
+            get { return _kindergartenNumber; }
             set
             {
-                if (_KindergartenNumber != value)
+                if (_kindergartenNumber != value)
                 {
-                    _KindergartenNumber = value;
+                    _kindergartenNumber = value;
                     RaisePropertyChanged();
                 }
             }
@@ -140,7 +141,6 @@ namespace RegistrationSystem.WPFUI.ViewModel
 
         public bool Text
         {
-            
             get { return _isVisibleAll; }
             set
             {
@@ -151,7 +151,8 @@ namespace RegistrationSystem.WPFUI.ViewModel
                 }
             }
         }
-      //
+
+
 
         public bool IsVisibleAll
         {
@@ -219,17 +220,19 @@ namespace RegistrationSystem.WPFUI.ViewModel
             RaisePropertyChanged();
 
         }
+
         public MainViewModel()
-        { }
-       
+        {
+        }
+
 
         private void GetgartenNumber()
         {
             _childModel = new ChildModel();
-            _KindergartenNumber = new List<int>();
+            _kindergartenNumber = new List<int>();
             foreach (var garten in KindergartensModels)
             {
-                _KindergartenNumber.Add(garten.Number);
+                _kindergartenNumber.Add(garten.Number);
             }
         }
     }

@@ -3,7 +3,7 @@ namespace RegistrationSystem.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Cuscade_Delete : DbMigration
+    public partial class Update : DbMigration
     {
         public override void Up()
         {
@@ -31,13 +31,14 @@ namespace RegistrationSystem.DAL.Migrations
                         LastName = c.String(nullable: false, maxLength: 50),
                         MiddleName = c.String(nullable: false, maxLength: 50),
                         DateOfBirth = c.DateTime(nullable: false),
+                        RegistrationTime = c.DateTime(nullable: false),
                         AddressId = c.Int(nullable: false),
-                        KindergartenId = c.Int(),
+                        KindergartenId = c.Int(nullable: false),
                         User_UserId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Address", t => t.AddressId, cascadeDelete: true)
-                .ForeignKey("dbo.Kindergarten", t => t.KindergartenId)
+                .ForeignKey("dbo.Kindergarten", t => t.KindergartenId, cascadeDelete: true)
                 .ForeignKey("dbo.User", t => t.User_UserId)
                 .Index(t => t.AddressId)
                 .Index(t => t.KindergartenId)
@@ -48,7 +49,7 @@ namespace RegistrationSystem.DAL.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false),
-                        Series = c.String(nullable: false, maxLength: 4),
+                        Series = c.String(nullable: false, maxLength: 20),
                         Number = c.Int(nullable: false),
                         Description = c.String(nullable: false, maxLength: 400),
                     })
@@ -67,6 +68,7 @@ namespace RegistrationSystem.DAL.Migrations
                     })
                 .PrimaryKey(t => t.KindergartenId)
                 .ForeignKey("dbo.Address", t => t.AddressId)
+                .Index(t => t.Number, unique: true)
                 .Index(t => t.AddressId);
             
             CreateTable(
@@ -124,6 +126,7 @@ namespace RegistrationSystem.DAL.Migrations
             DropIndex("dbo.Staff", new[] { "KindergartenId" });
             DropIndex("dbo.Staff", new[] { "StaffPositionId" });
             DropIndex("dbo.Kindergarten", new[] { "AddressId" });
+            DropIndex("dbo.Kindergarten", new[] { "Number" });
             DropIndex("dbo.BirthCertificate", new[] { "Id" });
             DropIndex("dbo.Child", new[] { "User_UserId" });
             DropIndex("dbo.Child", new[] { "KindergartenId" });

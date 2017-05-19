@@ -6,7 +6,7 @@
         xmlns:login="clr-namespace:RegistrationSystem.WPFUI.ViewModel"
         mc:Ignorable="d"
         Title="Login" Height="309" Width="434"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.DataContext>
         <login:LoginViewModel></login:LoginViewModel>
     </Window.DataContext>

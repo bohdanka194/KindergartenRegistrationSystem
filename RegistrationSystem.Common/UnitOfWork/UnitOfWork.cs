@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using RegistrationSystem.Common.Model;
-using RegistrationSystem.DAL.Concrete;
 using RegistrationSystem.DAL.Interfaces;
 using RegistrationSystem.DAL.Repositories;
 using RegistrationSystem.Entities;
@@ -17,9 +15,6 @@ namespace RegistrationSystem.Common.UnitOfWork
         private KindergartenRepository _kindergartenRepository = new KindergartenRepository();
         private StaffRepository _staffRepository = new StaffRepository();
         private UserRepository _userRepository = new UserRepository();
-        private IRepository<Staff> staffRepository;
-        private IRepository<StaffPosition> positionRepository;
-
 
 
         public bool IsUserExistInBase(string login, string password)
@@ -75,6 +70,7 @@ namespace RegistrationSystem.Common.UnitOfWork
                 _childRepository.Save();
             }
         }
+
         public IEnumerable<StaffModel> GetStaffModel(int number)
         {
             var modelsList = new List<StaffModel>();
@@ -82,13 +78,14 @@ namespace RegistrationSystem.Common.UnitOfWork
             {
                 modelsList.Add(new StaffModel()
                 {
-                   FirstName = model.FirstName,
-                   LastNAme = model.LastName,
-                   Position = model.Position
+                    FirstName = model.FirstName,
+                    LastNAme = model.LastName,
+                    Position = model.Position
                 });
             }
             return modelsList;
         }
+
         public List<ChildModel> GetChildrenModel(int number)
         {
             var modelsList = new List<ChildModel>();
@@ -112,6 +109,7 @@ namespace RegistrationSystem.Common.UnitOfWork
             }
             return modelsList;
         }
+
         public IEnumerable<KindergartenModel> GetKindergartenModels()
         {
             var modelsList = new List<KindergartenModel>();
