@@ -44,7 +44,7 @@ namespace RegistrationSystem.DAL.Concrete
         public virtual void Save() => _entities.SaveChanges();
 
         #region IDisposable Support
-
+        //Review BA: Write comments before expression.
         private bool _disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
