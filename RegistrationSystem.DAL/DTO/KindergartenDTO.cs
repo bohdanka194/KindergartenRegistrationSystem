@@ -8,7 +8,7 @@ namespace RegistrationSystem.DAL.DTO
 {
     public class KindergartenDTO
     {
-        
+        //Review BA: So many space line.
         public int KindergartenId { get; set; }
 
         
